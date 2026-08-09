@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="px-8 lg:px-16 pt-20 pb-10 max-w-7xl mx-auto border-t border-white/5 mt-16 relative">
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
         
         {/* Brand */}
         <div className="lg:col-span-2 space-y-8 pr-8">
@@ -63,20 +63,6 @@ export default function Footer() {
               <span className="text-gray-300">Debra, West Bengal</span>
             </li>
           </ul>
-        </div>
-
-        {/* Newsletter */}
-        <div className="lg:col-span-1 space-y-6">
-          <h4 className="text-white font-semibold text-lg tracking-wide">Newsletter</h4>
-          <p className="text-white text-sm leading-relaxed max-w-[200px]">
-            Subscribe to get special offers, new products and updates.
-          </p>
-          <div className="flex bg-[#18130f]/70 rounded-full p-1.5 border border-white/10 w-full">
-            <input type="email" placeholder="Enter your email" className="bg-transparent border-none outline-none text-white px-4 py-2 w-full text-sm placeholder:text-white" />
-            <button className="bg-[#d4a373] text-[#110d0a] p-2.5 rounded-full hover:bg-[#e6b981] transition-colors flex-shrink-0">
-              <ArrowRight size={18} strokeWidth={2.5} />
-            </button>
-          </div>
         </div>
 
       </div>

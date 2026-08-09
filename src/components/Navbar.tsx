@@ -4,14 +4,7 @@ import { useState, useEffect } from "react";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsAtTop(window.scrollY < 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -22,6 +15,30 @@ export default function Navbar() {
     { name: "Career", href: "#career" },
     { name: "Contact", href: "#contact" },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 50);
+
+      const sections = navLinks.map(link => link.href.substring(1));
+      let currentSection = "home";
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 3) {
+            currentSection = section;
+          }
+        }
+      }
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Set initial state
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 flex flex-col w-full">
@@ -52,7 +69,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               className={`transition-all duration-300 hover:text-[#d4a373] ${
-                link.name === "Home" ? "text-[#d4a373]" : ""
+                activeSection === link.href.substring(1) ? "text-[#d4a373]" : ""
               }`}
             >
               {link.name}
@@ -96,7 +113,9 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium text-gray-300 hover:text-[#d4a373] transition-colors"
+                className={`text-lg font-medium transition-colors hover:text-[#d4a373] ${
+                  activeSection === link.href.substring(1) ? "text-[#d4a373]" : "text-gray-300"
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}

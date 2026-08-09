@@ -34,13 +34,23 @@ const testimonials = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleSlideChange = (newIndex: number) => {
+    if (isTransitioning || newIndex === currentIndex) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(newIndex);
+      setIsTransitioning(false);
+    }, 300);
+  };
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    handleSlideChange((currentIndex + 1) % testimonials.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    handleSlideChange((currentIndex - 1 + testimonials.length) % testimonials.length);
   };
 
   // Get exactly 3 items for the grid to keep the design perfectly intact
@@ -61,7 +71,7 @@ export default function Testimonials() {
         <ChevronLeft size={24} />
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:px-10 lg:px-12">
+      <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:px-10 lg:px-12 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
         {visibleTestimonials.map((t, idx) => (
           <div key={idx} className="bg-[#18130f]/70 rounded-3xl p-10 border border-white/5 flex flex-col items-start text-left hover:border-[#d4a373]/20 transition-all duration-300">
             <div className="text-[#d4a373] text-6xl font-serif leading-none h-10 mb-6 opacity-40">“</div>
@@ -91,7 +101,7 @@ export default function Testimonials() {
         {testimonials.map((_, i) => (
           <div 
             key={i}
-            onClick={() => setCurrentIndex(i)}
+            onClick={() => handleSlideChange(i)}
             className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${i === currentIndex ? 'bg-[#d4a373] w-3 h-3' : 'bg-gray-700 hover:bg-gray-500'}`}
           ></div>
         ))}

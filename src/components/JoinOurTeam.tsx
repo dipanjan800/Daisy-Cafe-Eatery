@@ -23,7 +23,7 @@ export default function JoinOurTeam() {
     <section className="py-24 max-w-7xl mx-auto px-6 lg:px-12">
       <div className="text-center mb-16">
         <h2 className="text-4xl lg:text-5xl text-white font-serif mb-6">Join Our Team</h2>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-white text-lg max-w-2xl mx-auto">
           Be part of something special. We're looking for passionate individuals
           to help create memorable experiences.
         </p>

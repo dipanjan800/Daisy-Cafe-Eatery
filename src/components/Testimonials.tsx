@@ -34,34 +34,36 @@ const testimonials = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const handleSlideChange = (newIndex: number) => {
-    if (isTransitioning || newIndex === currentIndex) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex(newIndex);
-      setIsTransitioning(false);
-    }, 300);
-  };
+  // Maximum index you can slide to on desktop is (total - 3) so we don't show empty space.
+  // On mobile, it's (total - 1). We'll simplify and just limit the dots.
+  const maxDesktopIndex = testimonials.length - 3;
 
   const nextSlide = () => {
-    handleSlideChange((currentIndex + 1) % testimonials.length);
+    setCurrentIndex((prev) => (prev >= testimonials.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    handleSlideChange((currentIndex - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex((prev) => (prev <= 0 ? testimonials.length - 1 : prev - 1));
   };
 
-  // Get exactly 3 items for the grid to keep the design perfectly intact
-  const visibleTestimonials = [
-    testimonials[currentIndex % testimonials.length],
-    testimonials[(currentIndex + 1) % testimonials.length],
-    testimonials[(currentIndex + 2) % testimonials.length]
-  ];
-
   return (
-    <section className="px-8 lg:px-16 py-24 max-w-7xl mx-auto flex flex-col items-center relative">
+    <section className="px-8 lg:px-16 py-24 max-w-7xl mx-auto flex flex-col items-center relative overflow-hidden">
+      <style dangerouslySetInnerHTML={{__html: `
+        .testimonial-track {
+          --card-width: 100%;
+          --gap: 2rem;
+        }
+        @media (min-width: 768px) {
+          .testimonial-track {
+            --card-width: calc(33.333333% - 1.333333rem);
+          }
+        }
+        .testimonial-card {
+          width: var(--card-width);
+        }
+      `}} />
+
       <h2 className="text-3xl md:text-4xl text-white font-serif mb-16">What Our Customers Say</h2>
       
       <button 
@@ -71,23 +73,28 @@ export default function Testimonials() {
         <ChevronLeft size={24} />
       </button>
 
-      <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:px-10 lg:px-12 transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-        {visibleTestimonials.map((t, idx) => (
-          <div key={idx} className="bg-[#18130f]/70 rounded-3xl p-10 border border-white/5 flex flex-col items-start text-left hover:border-[#d4a373]/20 transition-all duration-300">
-            <div className="text-[#d4a373] text-6xl font-serif leading-none h-10 mb-6 opacity-40">“</div>
-            <p className="text-gray-300 text-[1.1rem] leading-relaxed mb-10 flex-grow font-serif italic pr-4">
-              {t.quote}
-            </p>
-            <div className="w-full flex items-center justify-between mt-auto">
-              <p className="text-white font-semibold tracking-wide">— {t.name}</p>
-              <div className="flex space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-[#d4a373] text-[#d4a373]" />
-                ))}
+      <div className="w-full md:px-10 lg:px-12 overflow-hidden">
+        <div 
+          className="testimonial-track flex gap-8 transition-transform duration-500 ease-in-out w-full"
+          style={{ transform: `translateX(calc(-${currentIndex} * (var(--card-width) + var(--gap))))` }}
+        >
+          {testimonials.map((t, idx) => (
+            <div key={idx} className="testimonial-card shrink-0 bg-[#18130f]/70 rounded-3xl p-10 border border-white/5 flex flex-col items-start text-left hover:border-[#d4a373]/20 transition-all duration-300">
+              <div className="text-[#d4a373] text-6xl font-serif leading-none h-10 mb-6 opacity-40">“</div>
+              <p className="text-gray-300 text-[1.1rem] leading-relaxed mb-10 flex-grow font-serif italic pr-4">
+                {t.quote}
+              </p>
+              <div className="w-full flex items-center justify-between mt-auto">
+                <p className="text-white font-semibold tracking-wide">— {t.name}</p>
+                <div className="flex space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="fill-[#d4a373] text-[#d4a373]" />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <button 
@@ -101,7 +108,7 @@ export default function Testimonials() {
         {testimonials.map((_, i) => (
           <div 
             key={i}
-            onClick={() => handleSlideChange(i)}
+            onClick={() => setCurrentIndex(i)}
             className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${i === currentIndex ? 'bg-[#d4a373] w-3 h-3' : 'bg-gray-700 hover:bg-gray-500'}`}
           ></div>
         ))}

@@ -71,7 +71,7 @@ export default function PopularDrinks() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-8 lg:px-16 py-24 max-w-7xl mx-auto flex flex-col items-center overflow-hidden">
+    <section id="menu" ref={sectionRef} className="px-8 lg:px-16 py-24 max-w-7xl mx-auto flex flex-col items-center overflow-hidden">
       <h2 className={`text-3xl md:text-4xl text-white font-serif mb-16 text-center transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         Our Popular Drinks
       </h2>

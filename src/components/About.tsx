@@ -2,7 +2,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function About() {
   return (
-    <section className="px-8 lg:px-16 py-24 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="px-8 lg:px-16 py-24 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <div className="relative h-[500px] lg:h-[600px] rounded-[40px] overflow-hidden bg-[#18130f]/70 border border-white/5 flex items-center justify-center group shadow-2xl">
          <div className="absolute inset-0 bg-gradient-to-tr from-[#110d0a]/80 to-transparent z-10 pointer-events-none"></div>
          <img src="/images/barista.png" alt="Barista pouring latte art" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />

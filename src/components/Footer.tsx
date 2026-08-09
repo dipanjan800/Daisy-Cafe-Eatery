@@ -2,7 +2,7 @@ import { Facebook, Instagram, Twitter, Pin, ArrowRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="px-8 lg:px-16 pt-20 pb-10 max-w-7xl mx-auto border-t border-white/5 mt-16 relative">
+    <footer id="contact" className="px-8 lg:px-16 pt-20 pb-10 max-w-7xl mx-auto border-t border-white/5 mt-16 relative">
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
         

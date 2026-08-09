@@ -5,13 +5,13 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Menu", href: "#" },
-    { name: "About", href: "#" },
-    { name: "Services", href: "#" },
-    { name: "Reviews", href: "#" },
+    { name: "Home", href: "#home" },
+    { name: "Menu", href: "#menu" },
+    { name: "About", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Reviews", href: "#reviews" },
     { name: "Blog", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (

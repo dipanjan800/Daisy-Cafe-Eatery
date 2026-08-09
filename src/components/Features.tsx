@@ -25,7 +25,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="px-8 lg:px-16 py-12 max-w-7xl mx-auto border border-white/10 rounded-3xl bg-black/40 backdrop-blur-md my-12 relative">
+    <section id="services" className="px-8 lg:px-16 py-12 max-w-7xl mx-auto border border-white/10 rounded-3xl bg-black/40 backdrop-blur-md my-12 relative">
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent pointer-events-none rounded-3xl"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-10 relative z-10">
         {features.map((feature, idx) => (

@@ -143,7 +143,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="px-8 lg:px-16 py-24 max-w-7xl mx-auto flex flex-col items-center relative overflow-hidden">
+    <section id="reviews" className="px-8 lg:px-16 py-24 max-w-7xl mx-auto flex flex-col items-center relative overflow-hidden">
       <style dangerouslySetInnerHTML={{__html: `
         .testimonial-track {
           --card-width: 100%;

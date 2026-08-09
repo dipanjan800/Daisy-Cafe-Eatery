@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import ScrollCanvas from "./components/ScrollCanvas";
 
+import JoinOurTeam from "./components/JoinOurTeam";
+
 export default function App() {
   return (
     <div className="min-h-screen bg-transparent text-white font-sans selection:bg-[#d4a373] selection:text-[#110d0a]">
@@ -27,6 +29,7 @@ export default function App() {
         <Features />
         <About />
         <Testimonials />
+        <JoinOurTeam />
         <CtaSection />
       </main>
 

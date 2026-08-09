@@ -9,10 +9,10 @@ export default function About() {
          <span className="text-[#d4a373]/40 font-serif text-2xl z-20 group-hover:scale-105 transition-transform duration-500">Barista Pouring Art</span>
       </div>
       
-      <div className="space-y-10">
+      <div className="space-y-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-8 lg:p-12 relative z-10">
         <div className="space-y-6">
           <h2 className="text-4xl lg:text-5xl text-white font-serif">About Daisy Cafe & Eatery</h2>
-          <p className="text-gray-400 text-lg leading-relaxed max-w-lg">
+          <p className="text-white text-lg leading-relaxed max-w-lg">
             Daisy Cafe & Eatery was born from a passion for coffee and a desire to deliver the perfect experience. From bean to cup, we control every detail to bring you unmatched flavor and quality.
           </p>
         </div>

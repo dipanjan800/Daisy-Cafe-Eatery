@@ -1,6 +1,17 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Volume2, VolumeX } from "lucide-react";
+import { useState, useRef } from "react";
 
 export default function Hero() {
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center max-w-7xl mx-auto px-6 lg:px-12 py-20">
       <div className="grid lg:grid-cols-2 items-center gap-10 lg:gap-16">
@@ -55,22 +66,32 @@ export default function Hero() {
 
             {/* Hero Video */}
             <video
+              ref={videoRef}
               className="absolute inset-0 h-full w-full object-cover"
               autoPlay
-              muted
+              muted={isMuted}
               loop
               playsInline
               preload="auto"
             >
               <source
-                src="/videos/hero-video.mp4"
+                src="/videos/new-hero-video.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
             </video>
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#110d0a]/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#110d0a]/80 via-transparent to-transparent pointer-events-none" />
+
+            {/* Mute Toggle Button */}
+            <button
+              onClick={toggleMute}
+              className="absolute bottom-6 right-6 z-20 p-3 rounded-full bg-black/40 text-white hover:bg-black/80 transition-colors border border-white/20 backdrop-blur-md flex items-center justify-center"
+              aria-label={isMuted ? "Unmute video" : "Mute video"}
+            >
+              {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+            </button>
 
           </div>
 

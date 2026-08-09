@@ -15,8 +15,15 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#110d0a]/60 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
+    <header className="sticky top-0 z-50 flex flex-col w-full">
+      {/* Announcement Bar */}
+      <div className="bg-gradient-to-r from-[#d4a373] to-[#e6b981] text-[#110d0a] text-xs sm:text-sm font-semibold py-2.5 px-4 text-center flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(212,163,115,0.15)] relative z-10">
+        <span className="text-base leading-none">🎓</span>
+        <span>Student Offer: Get a flat 10% discount when you show a valid student card!</span>
+      </div>
+
+      <nav className="w-full border-b border-white/5 bg-[#110d0a]/60 backdrop-blur-xl relative z-0">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
         {/* Logo */}
         <div className="flex items-center gap-3 cursor-pointer">
           <span className="text-2xl">☕</span>
@@ -107,6 +114,7 @@ export default function Navbar() {
           </div>
         </div>
       )}
-    </nav>
+      </nav>
+    </header>
   );
 }

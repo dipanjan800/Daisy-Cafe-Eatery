@@ -68,7 +68,7 @@ export default function Testimonials() {
       
       <button 
         onClick={prevSlide}
-        className="absolute left-0 lg:left-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg hidden md:flex items-center justify-center"
+        className="absolute left-0 lg:left-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg flex items-center justify-center"
       >
         <ChevronLeft size={24} />
       </button>
@@ -99,7 +99,7 @@ export default function Testimonials() {
 
       <button 
         onClick={nextSlide}
-        className="absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg hidden md:flex items-center justify-center"
+        className="absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg flex items-center justify-center"
       >
         <ChevronRight size={24} />
       </button>

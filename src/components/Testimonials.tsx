@@ -36,6 +36,7 @@ export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const minSwipeDistance = 50;
 
@@ -51,16 +52,23 @@ export default function Testimonials() {
     setCurrentIndex((prev) => (prev <= 0 ? testimonials.length - 1 : prev - 1));
   };
 
-  const onTouchStart = (e: React.TouchEvent) => {
+  const onPointerDown = (e: React.PointerEvent) => {
+    setIsDragging(true);
     setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchStart(e.clientX);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
   };
 
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isDragging) return;
+    setTouchEnd(e.clientX);
   };
 
-  const onTouchEnd = () => {
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
@@ -101,10 +109,11 @@ export default function Testimonials() {
       </button>
 
       <div 
-        className="w-full md:px-10 lg:px-12 overflow-hidden"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+        className="w-full md:px-10 lg:px-12 overflow-hidden select-none cursor-grab active:cursor-grabbing"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
       >
         <div 
           className="testimonial-track flex gap-8 transition-transform duration-500 ease-in-out w-full"

@@ -73,7 +73,7 @@ export default function Testimonials() {
     setIsDragging(true);
     setTouchEnd(null);
     setTouchStart(e.clientX);
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
@@ -84,7 +84,9 @@ export default function Testimonials() {
   const onPointerUp = (e: React.PointerEvent) => {
     if (!isDragging) return;
     setIsDragging(false);
-    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch(err) {}
     
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
@@ -126,7 +128,7 @@ export default function Testimonials() {
       </button>
 
       <div 
-        className="w-full md:px-10 lg:px-12 overflow-hidden select-none cursor-grab active:cursor-grabbing"
+        className="w-full md:px-10 lg:px-12 overflow-hidden select-none cursor-grab active:cursor-grabbing touch-pan-y"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}

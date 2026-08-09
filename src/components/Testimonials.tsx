@@ -33,23 +33,40 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  const [currentIndex, setCurrentIndex] = useState(testimonials.length);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const minSwipeDistance = 50;
+  const realIndex = currentIndex % testimonials.length;
 
   // Maximum index you can slide to on desktop is (total - 3) so we don't show empty space.
   // On mobile, it's (total - 1). We'll simplify and just limit the dots.
   const maxDesktopIndex = testimonials.length - 3;
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev >= testimonials.length - 1 ? 0 : prev + 1));
+    if (!transitionEnabled) return;
+    setCurrentIndex((prev) => prev + 1);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? testimonials.length - 1 : prev - 1));
+    if (!transitionEnabled) return;
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  const handleTransitionEnd = () => {
+    if (currentIndex >= testimonials.length * 2) {
+      setTransitionEnabled(false);
+      setCurrentIndex(currentIndex - testimonials.length);
+      setTimeout(() => setTransitionEnabled(true), 50);
+    } else if (currentIndex < testimonials.length) {
+      setTransitionEnabled(false);
+      setCurrentIndex(currentIndex + testimonials.length);
+      setTimeout(() => setTransitionEnabled(true), 50);
+    }
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
@@ -116,10 +133,11 @@ export default function Testimonials() {
         onPointerCancel={onPointerUp}
       >
         <div 
-          className="testimonial-track flex gap-8 transition-transform duration-500 ease-in-out w-full"
+          className={`testimonial-track flex gap-8 w-full ${transitionEnabled ? 'transition-transform duration-500 ease-in-out' : ''}`}
           style={{ transform: `translateX(calc(-${currentIndex} * (var(--card-width) + var(--gap))))` }}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {testimonials.map((t, idx) => (
+          {extendedTestimonials.map((t, idx) => (
             <div key={idx} className="testimonial-card shrink-0 bg-[#18130f]/70 rounded-3xl p-8 md:p-10 border border-white/5 flex flex-col items-start text-left hover:border-[#d4a373]/20 transition-all duration-300">
               <div className="text-[#d4a373] text-6xl font-serif leading-none h-10 mb-6 opacity-40">“</div>
               <p className="text-gray-300 text-[1.1rem] leading-relaxed mb-10 flex-grow font-serif italic pr-4">
@@ -149,8 +167,11 @@ export default function Testimonials() {
         {testimonials.map((_, i) => (
           <div 
             key={i}
-            onClick={() => setCurrentIndex(i)}
-            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${i === currentIndex ? 'bg-[#d4a373] w-3 h-3' : 'bg-gray-700 hover:bg-gray-500'}`}
+            onClick={() => {
+              setTransitionEnabled(true);
+              setCurrentIndex(i + testimonials.length);
+            }}
+            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${i === realIndex ? 'bg-[#d4a373] w-3 h-3' : 'bg-gray-700 hover:bg-gray-500'}`}
           ></div>
         ))}
       </div>

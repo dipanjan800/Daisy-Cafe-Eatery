@@ -15,17 +15,11 @@ export default function Footer() {
             Premium coffee crafted with passion and quality for true coffee lovers.
           </p>
           <div className="flex space-x-4">
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-[#d4a373] hover:bg-[#d4a373]/10 transition-all">
+            <a href="https://www.facebook.com/daisycafeneateryFb/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-[#d4a373] hover:bg-[#d4a373]/10 transition-all" aria-label="Facebook">
               <Facebook size={18} />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-[#d4a373] hover:bg-[#d4a373]/10 transition-all">
+            <a href="https://www.instagram.com/daisycafeneatery/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-[#d4a373] hover:bg-[#d4a373]/10 transition-all" aria-label="Instagram">
               <Instagram size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-[#d4a373] hover:bg-[#d4a373]/10 transition-all">
-              <Twitter size={18} />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white hover:text-white hover:border-[#d4a373] hover:bg-[#d4a373]/10 transition-all">
-              <Pin size={18} />
             </a>
           </div>
         </div>
@@ -54,13 +48,20 @@ export default function Footer() {
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-white font-semibold text-lg tracking-wide">Support</h4>
-          <ul className="space-y-3 text-sm text-white">
-            <li><a href="#" className="hover:text-[#d4a373] transition-colors">FAQ</a></li>
-            <li><a href="#" className="hover:text-[#d4a373] transition-colors">Shipping & Delivery</a></li>
-            <li><a href="#" className="hover:text-[#d4a373] transition-colors">Returns</a></li>
-            <li><a href="#" className="hover:text-[#d4a373] transition-colors">Terms & Conditions</a></li>
-            <li><a href="#" className="hover:text-[#d4a373] transition-colors">Privacy Policy</a></li>
+          <h4 className="text-white font-semibold text-lg tracking-wide">Contact Us</h4>
+          <ul className="space-y-4 text-sm text-white">
+            <li className="flex flex-col gap-1">
+              <span className="text-[#d4a373] text-xs uppercase tracking-wider">Phone</span>
+              <a href="tel:+919242262036" className="hover:text-[#e6b981] transition-colors text-base font-medium">+91 92422 62036</a>
+            </li>
+            <li className="flex flex-col gap-1">
+              <span className="text-[#d4a373] text-xs uppercase tracking-wider">Email</span>
+              <a href="mailto:hello@daisycafeneatery.com" className="hover:text-[#e6b981] transition-colors text-base font-medium">hello@daisycafeneatery.com</a>
+            </li>
+            <li className="flex flex-col gap-1">
+              <span className="text-[#d4a373] text-xs uppercase tracking-wider">Location</span>
+              <span className="text-gray-300">Debra, West Bengal</span>
+            </li>
           </ul>
         </div>
 

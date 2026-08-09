@@ -27,7 +27,15 @@ const drinks = [
 
 export default function PopularDrinks() {
   const [isVisible, setIsVisible] = useState(false);
+  const [quantities, setQuantities] = useState<{[key: number]: number}>({});
   const sectionRef = useRef<HTMLElement>(null);
+
+  const handleIncrement = (idx: number) => {
+    setQuantities(prev => ({
+      ...prev,
+      [idx]: (prev[idx] || 0) + 1
+    }));
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -71,9 +79,14 @@ export default function PopularDrinks() {
             <p className="text-[#5a4a42] text-sm leading-relaxed mb-8 flex-grow max-w-[200px]">{drink.desc}</p>
             
             <div className="w-full flex items-center justify-between mt-auto">
-              <span className="text-2xl text-[#110d0a] font-bold tracking-tight">{drink.price}</span>
-              <button className="bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-md">
-                <Plus size={20} strokeWidth={2.5} />
+              <span className="text-2xl text-[#110d0a] font-bold tracking-tight">
+                ₹{parseInt(drink.price.replace(/\D/g, ''), 10) * (quantities[idx] || 1)}
+              </span>
+              <button 
+                onClick={() => handleIncrement(idx)}
+                className="bg-[#d4a373] text-[#110d0a] w-11 h-11 flex items-center justify-center rounded-full hover:bg-[#e6b981] transition-colors shadow-md text-lg font-bold"
+              >
+                {quantities[idx] ? quantities[idx] : <Plus size={20} strokeWidth={2.5} />}
               </button>
             </div>
           </div>

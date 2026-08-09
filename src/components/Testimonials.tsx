@@ -34,6 +34,10 @@ const testimonials = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  const minSwipeDistance = 50;
 
   // Maximum index you can slide to on desktop is (total - 3) so we don't show empty space.
   // On mobile, it's (total - 1). We'll simplify and just limit the dots.
@@ -45,6 +49,29 @@ export default function Testimonials() {
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev <= 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    }
+    if (isRightSwipe) {
+      prevSlide();
+    }
   };
 
   return (
@@ -68,18 +95,23 @@ export default function Testimonials() {
       
       <button 
         onClick={prevSlide}
-        className="absolute left-0 lg:left-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg flex items-center justify-center"
+        className="absolute -left-3 md:left-0 lg:left-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-2 md:p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg flex items-center justify-center"
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
       </button>
 
-      <div className="w-full md:px-10 lg:px-12 overflow-hidden">
+      <div 
+        className="w-full md:px-10 lg:px-12 overflow-hidden"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div 
           className="testimonial-track flex gap-8 transition-transform duration-500 ease-in-out w-full"
           style={{ transform: `translateX(calc(-${currentIndex} * (var(--card-width) + var(--gap))))` }}
         >
           {testimonials.map((t, idx) => (
-            <div key={idx} className="testimonial-card shrink-0 bg-[#18130f]/70 rounded-3xl p-10 border border-white/5 flex flex-col items-start text-left hover:border-[#d4a373]/20 transition-all duration-300">
+            <div key={idx} className="testimonial-card shrink-0 bg-[#18130f]/70 rounded-3xl p-8 md:p-10 border border-white/5 flex flex-col items-start text-left hover:border-[#d4a373]/20 transition-all duration-300">
               <div className="text-[#d4a373] text-6xl font-serif leading-none h-10 mb-6 opacity-40">“</div>
               <p className="text-gray-300 text-[1.1rem] leading-relaxed mb-10 flex-grow font-serif italic pr-4">
                 {t.quote}
@@ -99,9 +131,9 @@ export default function Testimonials() {
 
       <button 
         onClick={nextSlide}
-        className="absolute right-0 lg:right-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg flex items-center justify-center"
+        className="absolute -right-3 md:right-0 lg:right-4 top-1/2 -translate-y-1/2 z-10 bg-[#d4a373] text-[#110d0a] p-2 md:p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg flex items-center justify-center"
       >
-        <ChevronRight size={24} />
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
       </button>
       
       <div className="flex justify-center items-center space-x-3 mt-12">

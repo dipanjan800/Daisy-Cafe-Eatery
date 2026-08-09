@@ -3,32 +3,64 @@ import { useState } from 'react';
 
 const testimonials = [
   {
-    quote: "The best coffee I've ever had! The flavor is incredible and the atmosphere is amazing.",
-    name: "Sarah J."
+    quote: "Very Nice Place with amazing atmosphere,very comfortable and fantastic service by the people. Delicious food and drinks,i enjoyed my visit to the place. Recommended for people looking for a comfy and chill place to hangout and have some delicious food",
+    name: "Aniket Dhal",
+    rating: 5
   },
   {
-    quote: "Every visit is a wonderful experience. Highly recommended!",
-    name: "Michael T."
+    quote: "A wonderful cafe with an excellent ambience. It is the first European-style café in this area, which makes it truly unique. The food quality is very good, and everything is well presented. I tried the cappuccino along with French fries, and the cappuccino was outstanding—definitely one of the best here.",
+    name: "Tuhin Jana",
+    rating: 5
   },
   {
-    quote: "Professional baristas and premium quality. Daisy Cafe & Eatery never disappoints.",
-    name: "Emma R."
+    quote: "Best cozy and aesthetic cafe in Debra, Do visit have fun, have the healthy n testy food with lots of option, the best coffe I ever had.... Food: 5/5 | Service: 5/5 | Atmosphere: 5/5",
+    name: "Sirkanta Samanta",
+    rating: 5
   },
   {
-    quote: "A hidden gem! Their pastries are to die for and the latte art is top notch.",
-    name: "David L."
+    quote: "A perfect place to visit with family and friends, amazing atmosphere, nice service, delicious food and drinks. Highly recommended for people who want to either enjoy it with friends or want a place to enjoy themselves",
+    name: "Animesh Dhal",
+    rating: 5
   },
   {
-    quote: "Perfect place to work remotely. Great wifi, amazing coffee, and super friendly staff.",
-    name: "Jessica M."
+    quote: "Personally, I liked because it was nicely organized and the prices of the items were a bit high, which could have been a little lower. But it was completely good in comparison.This will be a very pleasant place for those of us who love taking candid photos genz, above all else.❤️",
+    name: "Souvik Malakar",
+    rating: 4
   },
   {
-    quote: "I start every morning with their signature mocha. Unbeatable taste and quality.",
-    name: "Robert W."
+    quote: "A nice family restaurant. A must visit for all food lovers. Quality of food is very nice.",
+    name: "Alisha Nasrin",
+    rating: 5
   },
   {
-    quote: "The aesthetic is beautiful and the food is just as good as it looks. 10/10.",
-    name: "Chloe K."
+    quote: "A lovely cafe in Debra with a very warm and classy vibe 🌼 Daisy Cafe & Eatery has beautiful interiors, a clean and cozy atmosphere, and is perfect for spending quality time with friends or family. The food quality is really good, well-presented, and tastes fresh. The menu has nice variety, and everything feels reasonably priced for the quality they offer. Staff behavior is polite and helpful, which makes the experience even better.",
+    name: "Bapan Mondal",
+    rating: 4
+  },
+  {
+    quote: "Perfect place. Kolaghat is overhyped just visit here relax enjoy your food at much cheaper cost, better quality and taste in food. And no standing or waiting in que for hours and then have half available items in menu like in kolaghat.",
+    name: "Anupam Chawvla",
+    rating: 5
+  },
+  {
+    quote: "All over good, The ambiance was hero of the cafe..... Noise level Very quiet Group size Suitable for all group sizes Wait time No wait",
+    name: "MRINALIKA MANNA",
+    rating: 5
+  },
+  {
+    quote: "Nice Food Quality, Stuff behaviour is so good.",
+    name: "Jhumur Mahapatra",
+    rating: 5
+  },
+  {
+    quote: "Daisy : The restaurant feels like a fresh flower The ambience and food quality were excellent during my visit to this amazing cafe cum restaurant. Dishes were well prepared and exceptionally fresh. Books near the doorway reflects the class and thought behind it's maintenance. I feel proud for such a high class restaurant in our area. I definitely recommend Daisy for family outing.",
+    name: "Monalisa Bhattacharyya",
+    rating: 5
+  },
+  {
+    quote: "This is a very good place and the environment here is also very beautiful.The decoration of this cafe is very beautifully arranged. Here you can find all kinds of food like coffee, veg, non-veg cheese cake, brownie cake and the food is very delicious.If you have a student card, you get a 10% discount on food and drinks. The staff here are very nice and polite. This is a great place to spend some time with food and drinks in Debra.I would tell everyone to definitely visit here at least once.",
+    name: "Najimul Islam",
+    rating: 5
   }
 ];
 
@@ -166,7 +198,7 @@ export default function Testimonials() {
               
               <div className="flex space-x-1 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={15} className="fill-[#FBBC05] text-[#FBBC05]" />
+                  <Star key={i} size={15} className={i < (t.rating || 5) ? "fill-[#FBBC05] text-[#FBBC05]" : "text-[#FBBC05] opacity-30"} />
                 ))}
               </div>
 

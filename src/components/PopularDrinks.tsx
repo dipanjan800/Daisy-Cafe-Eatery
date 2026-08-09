@@ -1,4 +1,4 @@
-import { Plus, Star } from 'lucide-react';
+import { Plus, Star, Minus } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 const drinks = [
@@ -35,6 +35,21 @@ export default function PopularDrinks() {
       ...prev,
       [idx]: (prev[idx] || 0) + 1
     }));
+  };
+
+  const handleDecrement = (idx: number) => {
+    setQuantities(prev => {
+      const current = prev[idx] || 0;
+      if (current <= 1) {
+        const newState = { ...prev };
+        delete newState[idx];
+        return newState;
+      }
+      return {
+        ...prev,
+        [idx]: current - 1
+      };
+    });
   };
 
   useEffect(() => {
@@ -82,12 +97,30 @@ export default function PopularDrinks() {
               <span className="text-2xl text-[#110d0a] font-bold tracking-tight">
                 ₹{parseInt(drink.price.replace(/\D/g, ''), 10) * (quantities[idx] || 1)}
               </span>
-              <button 
-                onClick={() => handleIncrement(idx)}
-                className="bg-[#d4a373] text-[#110d0a] w-11 h-11 flex items-center justify-center rounded-full hover:bg-[#e6b981] transition-colors shadow-md text-lg font-bold"
-              >
-                {quantities[idx] ? quantities[idx] : <Plus size={20} strokeWidth={2.5} />}
-              </button>
+              {quantities[idx] ? (
+                <div className="flex items-center space-x-2 bg-[#d4a373] text-[#110d0a] rounded-full px-1 shadow-md h-11">
+                  <button 
+                    onClick={() => handleDecrement(idx)} 
+                    className="w-9 h-9 flex items-center justify-center hover:bg-[#e6b981] rounded-full transition-colors"
+                  >
+                    <Minus size={18} strokeWidth={2.5} />
+                  </button>
+                  <span className="font-bold text-lg min-w-[20px] text-center">{quantities[idx]}</span>
+                  <button 
+                    onClick={() => handleIncrement(idx)} 
+                    className="w-9 h-9 flex items-center justify-center hover:bg-[#e6b981] rounded-full transition-colors"
+                  >
+                    <Plus size={18} strokeWidth={2.5} />
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={() => handleIncrement(idx)}
+                  className="bg-[#d4a373] text-[#110d0a] w-11 h-11 flex items-center justify-center rounded-full hover:bg-[#e6b981] transition-colors shadow-md text-lg font-bold"
+                >
+                  <Plus size={20} strokeWidth={2.5} />
+                </button>
+              )}
             </div>
           </div>
         ))}

@@ -2,7 +2,7 @@ import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import { useState, useRef } from "react";
 
 export default function Hero() {
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const toggleMute = () => {

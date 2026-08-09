@@ -13,7 +13,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-20 lg:py-20">
+    <section className="relative lg:min-h-screen flex flex-col justify-center max-w-7xl mx-auto px-6 lg:px-12 pt-28 pb-16 lg:pt-32 lg:pb-20">
       <div className="w-full grid md:grid-cols-2 items-center gap-12 lg:gap-16 my-auto">
 
         {/* Left Content */}

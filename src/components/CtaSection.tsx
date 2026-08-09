@@ -16,9 +16,8 @@ export default function CtaSection() {
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
-        <div className="flex-1 w-full h-[300px] md:h-full md:absolute md:inset-y-0 md:right-0 md:w-1/2 bg-gradient-to-l from-[#2a201a] via-[#1a1410] to-[#18130f] flex items-center justify-center border-l border-white/5">
-            {/* Image Placeholder */}
-            <span className="text-[#d4a373]/30 font-serif text-2xl tracking-widest uppercase">Latte Cup Visual</span>
+        <div className="flex-1 w-full h-[300px] md:h-full md:absolute md:inset-y-0 md:right-0 md:w-1/2 bg-gradient-to-l from-[#2a201a] via-[#1a1410] to-[#18130f] flex items-center justify-center border-l border-white/5 overflow-hidden">
+            <img src="/images/latte-cta.png" alt="Latte cup" className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700" />
         </div>
       </div>
     </section>

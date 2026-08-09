@@ -6,19 +6,22 @@ const drinks = [
     name: 'Cappuccino',
     rating: '4.9',
     desc: '20% espresso, 40% steamed milk, 40% milk foam',
-    price: '$4.50',
+    price: '₹350',
+    image: '/images/cappuccino.png'
   },
   {
     name: 'Latte',
     rating: '5.0',
     desc: '30% espresso, 70% steamed milk',
-    price: '$4.90',
+    price: '₹380',
+    image: '/images/latte.png'
   },
   {
     name: 'Mocha',
     rating: '4.7',
     desc: '30% espresso, 60% dark chocolate, 10% steamed milk',
-    price: '$4.90',
+    price: '₹380',
+    image: '/images/mocha.png'
   }
 ];
 
@@ -53,24 +56,23 @@ export default function PopularDrinks() {
         {drinks.map((drink, idx) => (
           <div key={idx} 
                style={{ transitionDelay: `${isVisible ? idx * 200 : 0}ms` }}
-               className={`bg-[#18130f]/70 rounded-3xl p-8 border border-white/5 flex flex-col items-center text-center relative group hover:border-[#d4a373]/30 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0 hover:-translate-y-2' : 'opacity-0 translate-y-12'}`}>
-            <div className="absolute top-6 right-6 bg-white text-[#110d0a] text-xs font-bold px-2.5 py-1 rounded flex items-center space-x-1 shadow-md">
+               className={`bg-[#FDFBF7]/80 backdrop-blur-md rounded-3xl p-8 border border-white/10 flex flex-col items-center text-center relative group hover:shadow-2xl transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0 hover:-translate-y-2' : 'opacity-0 translate-y-12'}`}>
+            <div className="absolute top-6 right-6 bg-[#110d0a] text-white text-xs font-bold px-2.5 py-1 rounded flex items-center space-x-1 shadow-md z-20">
               <span>{drink.rating}</span>
               <Star size={12} className="fill-[#d4a373] text-[#d4a373]" />
             </div>
             
-            {/* Image Placeholder */}
-            <div className="w-32 h-44 bg-gradient-to-b from-[#2a201a] to-transparent rounded-2xl mb-8 flex items-end justify-center pb-6 border border-white/5 relative">
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#110d0a]/50 to-transparent rounded-b-2xl"></div>
-                <span className="text-[#d4a373]/30 text-xs font-medium z-10 tracking-widest uppercase">Cup {idx+1}</span>
+            {/* Drink Image */}
+            <div className="w-40 h-40 mb-8 relative rounded-full overflow-hidden border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-500">
+                <img src={drink.image} alt={drink.name} className="w-full h-full object-cover" />
             </div>
             
-            <h3 className="text-2xl text-white font-serif mb-3">{drink.name}</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow max-w-[200px]">{drink.desc}</p>
+            <h3 className="text-2xl text-[#110d0a] font-serif mb-3">{drink.name}</h3>
+            <p className="text-[#5a4a42] text-sm leading-relaxed mb-8 flex-grow max-w-[200px]">{drink.desc}</p>
             
             <div className="w-full flex items-center justify-between mt-auto">
-              <span className="text-2xl text-white font-bold tracking-tight">{drink.price}</span>
-              <button className="bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-lg">
+              <span className="text-2xl text-[#110d0a] font-bold tracking-tight">{drink.price}</span>
+              <button className="bg-[#d4a373] text-[#110d0a] p-3 rounded-full hover:bg-[#e6b981] transition-colors shadow-md">
                 <Plus size={20} strokeWidth={2.5} />
               </button>
             </div>

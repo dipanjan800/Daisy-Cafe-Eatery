@@ -1,8 +1,17 @@
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY < 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -17,7 +26,11 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 flex flex-col w-full">
       {/* Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#d4a373] to-[#e6b981] text-[#110d0a] text-xs sm:text-sm font-semibold py-2.5 px-4 text-center flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(212,163,115,0.15)] relative z-10">
+      <div 
+        className={`bg-gradient-to-r from-[#d4a373] to-[#e6b981] text-[#110d0a] text-xs sm:text-sm font-semibold text-center flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(212,163,115,0.15)] relative z-10 transition-all duration-500 overflow-hidden ${
+          isAtTop ? "py-2.5 px-4 max-h-20 opacity-100" : "py-0 px-4 max-h-0 opacity-0 pointer-events-none"
+        }`}
+      >
         <span className="text-base leading-none">🎓</span>
         <span>Student Offer: Get a flat 10% discount when you show a valid student card!</span>
       </div>
